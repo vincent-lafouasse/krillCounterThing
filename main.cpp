@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 	if(running) {
 		int i = 0;
 		int instruction = 0;
-		while(i <= 17) {
+		while(i <= 15) {
 			if (in[instruction] == '+') out[i]++;
 			else if (in[instruction] == '-') out[i]--;
 			else if(in[instruction] == '>') i++;
