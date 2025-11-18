@@ -8,7 +8,6 @@
 #include <string>
 
 constexpr std::size_t size = 16;
-std::array<int, size> out = {0};
 
 std::string readEntireFile(std::ifstream& file) {
     std::stringstream buffer;
@@ -46,27 +45,27 @@ int main(int argc, char** argv) {
         printf("failed to open file %s\n", argv[1]);
         exit(1);
     }
-
     std::string input = readEntireFile(file);
 
+    std::array<int, size> output = {0};
     int i = 0;
     for (char c : input) {
         if (c == '+') {
-            out[i]++;
+            output[i]++;
         } else if (c == '-') {
-            out[i]--;
+            output[i]--;
         } else if (c == '>') {
             i = wrappingAdd(i);
         } else if (c == '<') {
             i = wrappingSub(i);
         } else if (c == '?') {
-            out[i] *= -1;
+            output[i] *= -1;
         } else if (c == '!') {
-            out[i] *= 2;
+            output[i] *= 2;
         }
     }
 
-    for (int n : out) {
+    for (int n : output) {
         printf("%i ", n);
     }
     printf("\n");
