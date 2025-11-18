@@ -2,7 +2,6 @@
 #include <unistd.h>
 
 #include <array>
-#include <cstring>
 #include <fstream>
 #include <sstream>
 #include <string>
