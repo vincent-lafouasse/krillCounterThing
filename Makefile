@@ -1,3 +1,3 @@
 build/streamThing: main.cpp
 	mkdir -p build
-	g++ main.cpp -o build/streamThing
+	g++ -std=c++11 main.cpp -o build/streamThing
