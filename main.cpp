@@ -66,10 +66,8 @@ int main(int argc, char** argv) {
         }
     }
 
-    int o = 0;
-    while (o < 16) {
-        printf("%i", out[o]);
-        o++;
+    for (int n : out) {
+        printf("%i ", n);
     }
     printf("\n");
     return 0;
