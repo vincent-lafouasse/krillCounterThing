@@ -3,10 +3,15 @@
 #include <fstream>
 #include <string>
 #include <cstring>
+#include <sstream>
 
-std::string input;
-char in[256];
 int out[16] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+
+std::string readEntireFile(std::ifstream& file) {
+	std::stringstream buffer;
+	buffer << file.rdbuf();
+	return buffer.str();
+}
 
 int main(int argc, char **argv) {
 	if (argc < 2) {
@@ -23,19 +28,17 @@ int main(int argc, char **argv) {
 		exit(1);
 	}
 
-	std::getline(file,input);
-	std::strncpy(in, input.c_str(), sizeof(in));
-	in[255] = '\0';
+	std::string input = readEntireFile(file);
 
 	int i = 0;
 	int instruction = 0;
 	while(i <= 15 & i > -1) {
-		if (in[instruction] == '+') out[i]++;
-		else if (in[instruction] == '-') out[i]--;
-		else if(in[instruction] == '>') i++;
-		else if(in[instruction] == '<') i--;
-		else if(in[instruction] == '?') out[i] *= -1;
-		else if(in[instruction] == '!') out[i] *= 2;
+		if (input[instruction] == '+') out[i]++;
+		else if (input[instruction] == '-') out[i]--;
+		else if(input[instruction] == '>') i++;
+		else if(input[instruction] == '<') i--;
+		else if(input[instruction] == '?') out[i] *= -1;
+		else if(input[instruction] == '!') out[i] *= 2;
 		else break;
 		instruction++;
 	}
