@@ -14,6 +14,22 @@ std::string readEntireFile(std::ifstream& file) {
 	return buffer.str();
 }
 
+int wrappingAdd(int i) {
+	if (++i == size) {
+		return 0;
+	} else {
+		return i;
+	}
+}
+
+int wrappingSub(int i) {
+	if (--i == -1) {
+		return size - 1;
+	} else {
+		return i;
+	}
+}
+
 int main(int argc, char **argv) {
 	if (argc < 2) {
 		printf("too few args!\n");
@@ -32,17 +48,22 @@ int main(int argc, char **argv) {
 	std::string input = readEntireFile(file);
 
 	int i = 0;
-	int instruction = 0;
-	while(i <= 15 & i > -1) {
-		if (input[instruction] == '+') out[i]++;
-		else if (input[instruction] == '-') out[i]--;
-		else if(input[instruction] == '>') i++;
-		else if(input[instruction] == '<') i--;
-		else if(input[instruction] == '?') out[i] *= -1;
-		else if(input[instruction] == '!') out[i] *= 2;
-		else break;
-		instruction++;
+	for (char c : input) {
+		if (c == '+') {
+			out[i]++;
+		} else if (c == '-') {
+			out[i]--;
+		} else if (c == '>') {
+			i = wrappingAdd(i);
+		} else if (c == '<') {
+			i = wrappingSub(i);
+		} else if(c == '?') {
+			out[i] *= -1;
+		} else if(c == '!') {
+			out[i] *= 2;
+		}
 	}
+
 	int o = 0;
 	while(o < 16) {
 		printf("%i", out[o]);
